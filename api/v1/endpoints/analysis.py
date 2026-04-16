@@ -387,7 +387,7 @@ def _handle_sync_analysis(
             status_code=500,
             detail={
                 "error": "internal_error",
-                "message": f"分析过程发生错误: {str(e)}"
+                "message": "分析过程发生错误"
             }
         )
 
@@ -654,7 +654,7 @@ def get_analysis_status(task_id: str) -> TaskStatus:
             status_code=500,
             detail={
                 "error": "internal_error",
-                "message": f"查询任务状态失败: {str(e)}"
+                "message": "查询任务状态失败"
             }
         )
 

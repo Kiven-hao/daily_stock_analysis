@@ -21,6 +21,10 @@ EXEMPT_PATHS = frozenset({
     "/api/v1/auth/status",
     "/api/health",
     "/health",
+})
+
+# Docs paths are protected when auth is enabled to prevent API schema leakage
+DOCS_PATHS = frozenset({
     "/docs",
     "/redoc",
     "/openapi.json",
@@ -48,7 +52,9 @@ class AuthMiddleware(BaseHTTPMiddleware):
         if _path_exempt(path):
             return await call_next(request)
 
-        if not path.startswith("/api/v1/"):
+        normalized = path.rstrip("/") or "/"
+        is_docs = normalized in DOCS_PATHS
+        if not is_docs and not path.startswith("/api/v1/"):
             return await call_next(request)
 
         cookie_val = request.cookies.get(COOKIE_NAME)

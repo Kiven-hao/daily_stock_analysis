@@ -124,7 +124,7 @@ def get_history_list(
             status_code=500,
             detail={
                 "error": "internal_error",
-                "message": f"查询历史列表失败: {str(e)}"
+                "message": "查询历史列表失败"
             }
         )
 
@@ -169,7 +169,7 @@ def delete_history_records(
             status_code=500,
             detail={
                 "error": "internal_error",
-                "message": f"删除历史记录失败: {str(e)}"
+                "message": "删除历史记录失败"
             }
         )
 
@@ -332,7 +332,7 @@ def get_history_detail(
             status_code=500,
             detail={
                 "error": "internal_error",
-                "message": f"查询历史详情失败: {str(e)}"
+                "message": "查询历史详情失败"
             }
         )
 
@@ -390,7 +390,7 @@ def get_history_news(
             status_code=500,
             detail={
                 "error": "internal_error",
-                "message": f"查询新闻情报失败: {str(e)}"
+                "message": "查询新闻情报失败"
             }
         )
 
@@ -445,7 +445,7 @@ def get_history_markdown(
             status_code=500,
             detail={
                 "error": "internal_error",
-                "message": f"获取 Markdown 报告失败: {str(e)}"
+                "message": "获取 Markdown 报告失败"
             }
         )
 

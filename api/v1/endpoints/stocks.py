@@ -303,7 +303,7 @@ def get_stock_quote(stock_code: str) -> StockQuote:
             status_code=500,
             detail={
                 "error": "internal_error",
-                "message": f"获取实时行情失败: {str(e)}"
+                "message": "获取实时行情失败"
             }
         )
 
@@ -384,6 +384,6 @@ def get_stock_history(
             status_code=500,
             detail={
                 "error": "internal_error",
-                "message": f"获取历史行情失败: {str(e)}"
+                "message": "获取历史行情失败"
             }
         )

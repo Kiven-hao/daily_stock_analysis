@@ -740,7 +740,13 @@ class DatabaseManager:
         def _configure_sqlite_connection(dbapi_connection, _connection_record) -> None:
             cursor = dbapi_connection.cursor()
             try:
-                cursor.execute(f"PRAGMA busy_timeout={int(self._sqlite_busy_timeout_ms)}")
+                # Use parameterized value to avoid f-string injection in SQL.
+                # SQLite PRAGMA doesn't support ? placeholders, so we
+                # validate the value as a non-negative integer first.
+                timeout_ms = int(self._sqlite_busy_timeout_ms)
+                if timeout_ms < 0:
+                    timeout_ms = 0
+                cursor.execute("PRAGMA busy_timeout=%d" % timeout_ms)
                 if self._sqlite_file_db and self._sqlite_wal_enabled:
                     cursor.execute("PRAGMA journal_mode=WAL")
             except Exception as exc:

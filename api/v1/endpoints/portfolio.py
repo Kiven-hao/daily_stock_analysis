@@ -48,7 +48,7 @@ router = APIRouter()
 def _bad_request(exc: Exception) -> HTTPException:
     return HTTPException(
         status_code=400,
-        detail={"error": "validation_error", "message": str(exc)},
+        detail={"error": "validation_error", "message": "请求参数校验失败"},
     )
 
 
@@ -56,7 +56,7 @@ def _internal_error(message: str, exc: Exception) -> HTTPException:
     logger.error(f"{message}: {exc}", exc_info=True)
     return HTTPException(
         status_code=500,
-        detail={"error": "internal_error", "message": f"{message}: {str(exc)}"},
+        detail={"error": "internal_error", "message": message},
     )
 
 
